@@ -1,19 +1,22 @@
 # Changelog
 
-## v1.1.0 - 2024-12-06
+All notable changes to this project will be documented in this file.
+
+## [1.1.0] - 2024-12-06
 ### Added
-- Styled table headers with a purple background and white text.
-- Centered all content in table cells (text and logo).
-- Added hover effect for table rows.
-- Dynamically populated table with JavaScript.
-- Styled price action to show green for positive and red for negative growth.
-- Created responsive design to ensure proper scaling on smaller devices.
+- Category and date range filters for tokens and meme coins.
+- Dashboard with price visualization using Chart.js.
+- Real-time price updates via WebSockets.
+- CSV export functionality for listed data.
+- New responsive and professional table UI.
 
-### Changed
-- Removed unnecessary columns (`Entry` and `Highlight Achievement`) to simplify layout.
-- Adjusted padding and spacing to create a compact table design.
+### Updated
+- Improved table readability with better padding and alignment.
+- Refined filter UI for better usability.
 
----
+### Fixed
+- Resolved alignment issues with logos and text.
+- Corrected table responsiveness on smaller screens.
 
-## v1.0.0 - Initial Release
-- Basic static table setup.
+### Removed
+- Columns "Entry" and "Highlights Achieved" for streamlined content.

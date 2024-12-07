@@ -1,0 +1,123 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+    color: #212529;
+}
+
+h2.page-title {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 1.8rem;
+    color: #5A4CAD; /* Purple for accent */
+}
+
+/* Filter Container */
+.filter-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 20px auto;
+    max-width: 1000px;
+    flex-wrap: wrap;
+}
+
+.filter-container label {
+    margin-right: 5px;
+    font-weight: bold;
+}
+
+.filter-container input,
+.filter-container select {
+    padding: 5px 10px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Table Styles */
+.table-container {
+    margin: 20px auto;
+    max-width: 1200px;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+thead {
+    background-color: #5A4CAD;
+    color: #fff;
+    text-align: center;
+}
+
+thead th {
+    padding: 10px;
+    font-size: 1rem;
+}
+
+tbody td {
+    text-align: center;
+    padding: 12px;
+    font-size: 0.95rem;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tbody tr:hover {
+    background-color: #e8e8ff;
+}
+
+/* Logo Styling */
+td img.logo {
+    width: 50px;
+    height: 50px;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Growth Column */
+.price-up {
+    color: #28a745; /* Green */
+    font-weight: bold;
+}
+
+.price-down {
+    color: #dc3545; /* Red */
+    font-weight: bold;
+}
+
+/* Pagination */
+#pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+#pagination-container button {
+    padding: 8px 12px;
+    margin: 0 5px;
+    border: none;
+    border-radius: 4px;
+    background-color: #5A4CAD;
+    color: white;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+#pagination-container button.active {
+    background-color: #473A9C;
+    font-weight: bold;
+}
+
+#pagination-container button:hover {
+    background-color: #6B59D4;
+}
