@@ -1,62 +1,54 @@
-// Sample data (replace with real API calls)
-const tokenData = [
-    {
-        type: "Token",
-        logo: "https://via.placeholder.com/40",
-        name: "Bitcoin",
-        price: "$37,000",
-        growth: "+5%",
-        growthClass: "price-up",
-        volume: "$20,000,000",
-        marketCap: "$700,000,000"
-    },
-    {
-        type: "Meme Coin",
-        logo: "https://via.placeholder.com/40",
-        name: "DogeCoin",
-        price: "$0.064",
-        growth: "-2%",
-        growthClass: "price-down",
-        volume: "$1,000,000",
-        marketCap: "$10,000,000"
-    },
-    {
-        type: "Token",
-        logo: "https://via.placeholder.com/40",
-        name: "Ethereum",
-        price: "$2,400",
-        growth: "+3%",
-        growthClass: "price-up",
-        volume: "$15,000,000",
-        marketCap: "$300,000,000"
-    },
-    {
-        type: "Meme Coin",
-        logo: "https://via.placeholder.com/40",
-        name: "Shiba Inu",
-        price: "$0.00001",
-        growth: "+8%",
-        growthClass: "price-up",
-        volume: "$2,000,000",
-        marketCap: "$50,000,000"
-    },
-];
-
-// Dynamically populate table rows
 const tableBody = document.getElementById("table-body");
+const filterDropdown = document.getElementById("filter");
 
-tokenData.forEach(token => {
-    const row = document.createElement("tr");
+// Fetch data from CoinGecko
+async function fetchTokenData() {
+    const response = await fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1");
+    return response.json();
+}
 
-    row.innerHTML = `
-        <td>${token.type}</td>
-        <td><img src="${token.logo}" alt="Logo" class="logo"></td>
-        <td>${token.name}</td>
-        <td>${token.price}</td>
-        <td class="${token.growthClass}">${token.growth}</td>
-        <td>${token.volume}</td>
-        <td>${token.marketCap}</td>
-    `;
+// Render table rows dynamically
+function renderTable(data) {
+    tableBody.innerHTML = "";
 
-    tableBody.appendChild(row);
+    data.forEach(token => {
+        const row = document.createElement("tr");
+
+        const growthClass = parseFloat(token.price_change_percentage_24h) >= 0 ? "price-up" : "price-down";
+        const growthIcon = growthClass === "price-up" ? "fas fa-arrow-up" : "fas fa-arrow-down";
+
+        row.innerHTML = `
+            <td>${token.type}</td>
+            <td><img src="${token.image}" alt="Logo" class="logo"></td>
+            <td>${token.name}</td>
+            <td>${token.current_price.toLocaleString("en-US", { style: "currency", currency: "USD" })}</td>
+            <td class="${growthClass}">
+                ${token.price_change_percentage_24h.toFixed(2)}%
+                <i class="${growthIcon} price-arrow"></i>
+            </td>
+            <td>${token.total_volume.toLocaleString("en-US", { style: "currency", currency: "USD" })}</td>
+            <td>${token.market_cap.toLocaleString("en-US", { style: "currency", currency: "USD" })}</td>
+        `;
+
+        tableBody.appendChild(row);
+    });
+}
+
+// Filter tokens based on type
+function filterTable(type) {
+    fetchTokenData().then(data => {
+        const filteredData = type === "all" ? data : data.filter(token => token.type === type);
+        renderTable(filteredData);
+    });
+}
+
+// Fetch and render table data initially
+fetchTokenData().then(data => {
+    renderTable(data);
+});
+
+// Add event listener for filtering
+filterDropdown.addEventListener("change", () => {
+    const filterType = filterDropdown.value;
+    filterTable(filterType);
 });
